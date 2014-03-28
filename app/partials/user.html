@@ -1,0 +1,94 @@
+<div class="page-header full-header">
+    <div class="profile-holder" ng-show="headerContent === 'profile'">
+        <p><img ng-src="{{ user['avatar URL'] }}" class="profile"></p>
+        <h1>{{ user.name }}</h1>
+        <p><span class="header-words">{{user.status}}</span></p>
+        <p>Followers: 302</p>
+        <p>Ratings: 4/5</p>
+    </div>
+    <div class="facts-holder" ng-show="headerContent === 'facts'">
+        <h3>{{ user.name }}</h3>
+        <table>
+            <tr>
+                <td>Height:</td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td>Facebook:</td>
+                <td>Tyler</td>
+            </tr>
+            <tr>
+                <td>Sports:</td>
+                <td>soccer, tennis, swimming</td>
+            </tr>
+            <tr>
+                <td>Age:</td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td>School:</td>
+                <td>Stanford University</td>
+            </tr>
+        </table>
+    </div>
+    <div class="signature-holder" ng-show="headerContent === 'signature'">
+        <h3>{{ user.name }}</h3>
+        <iframe class="signature" src="https://www.youtube.com/embed/5LYAEz777AU" frameborder="0" allowfullscreen></iframe>
+        <p><span class="header-words">This demonstrates my skills in fashion design and consultancy.</span></p>
+    </div>
+    <div class="titles-holder" ng-show="headerContent === 'titles'">
+        <h3>{{ user.name }}</h3>
+    </div>
+    <div class="header-buttons-group">
+        <input type="button" value="Profile" ng-click="headerContent = 'profile'" class="button red-button tile">
+        <input type="button" value="Facts" ng-click="headerContent = 'facts'" class="button red-button tile">
+        <input type="button" value="Signature" ng-click="headerContent = 'signature'" class="button red-button tile">
+        <input type="button" value="Titles" ng-click="headerContent = 'titles'" class="button red-button tile">
+    </div>
+</div>
+
+<div class="container">
+    <div id="user-feed"><div class="left-container">
+        <div class="content-box" ng-repeat="event in events">
+            <div class="feed-info">
+                <h3>{{ event.league }} - Stage {{ event.stage }}</h3>
+                <p>Ended Date: </p>
+            </div>
+            <div class="match-result tile">
+                <event event-object="event" data="data"></event>
+                <p><span ng-if="event.asTeam"><a ng-href="#/user/:{{userID}}">{{user.name}}</a> plays for
+                    <a ng-href="#/team/:{{event.userTeamID}}">{{data.teams[event.userTeamID].name}}</a></span></p>
+            </div>
+        </div>
+    </div></div>
+
+    <div id="user-sideboard"><div class="right-container">
+        <div class="content-box">
+            <h3>Coming Matches</h3>
+        </div>
+        <div class="content-box">
+            <h3>Rating and Reviews</h3>
+        </div>
+        <div class="content-box">
+            <h3>Leagues Played</h3>
+            <ul>
+                <li ng-repeat="league in leaguesPlayed">{{ league }}</li>
+            </ul>
+        </div>
+        <div class="content-box">
+            <h3>Communities Currently Joined</h3>
+            <ul>
+                <li ng-repeat="community in communities">{{ community }}</li>
+            </ul>
+        </div>
+        <div class="content-box">
+            <h3>Teams Currently Joined</h3>
+            <face-thumbnail ng-repeat="team in teams"
+                    name="{{ team.name }}"
+                    src="{{ team['avatar URL'] }}"
+                    href="#/team/:{{ team.id }}">
+            </face-thumbnail>
+        </div>
+    </div></div>
+</div>
+
