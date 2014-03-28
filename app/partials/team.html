@@ -1,0 +1,78 @@
+<div class="page-header full-header">
+    <div class="profile-holder" ng-show="headerContent === 'profile'">
+        <p><img ng-src="{{ team['avatar URL'] }}" class="profile"></p>
+        <h1>{{ team.name }}</h1>
+        <p>a team in {{community}} Community</p>
+        <p>Followers: 302</p>
+        <p>Ratings: 4/5</p>
+    </div>
+    <div class="facts-holder" ng-show="headerContent === 'facts'">
+        <h3>{{ team.name }}</h3>
+        <table>
+            <tr>
+                <td>Height:</td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td>Facebook:</td>
+                <td>Tyler</td>
+            </tr>
+            <tr>
+                <td>Sports:</td>
+                <td>soccer, tennis, swimming</td>
+            </tr>
+            <tr>
+                <td>Age:</td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td>School:</td>
+                <td>Stanford University</td>
+            </tr>
+        </table>
+    </div>
+    <div class="signature-holder" ng-show="headerContent === 'signature'">
+        <h3>{{ team.name }}</h3>
+        <iframe class="signature" src="//www.youtube.com/embed/b4qQplOAQBQ" frameborder="0" allowfullscreen></iframe>
+        <p><span class="header-words">We play music at Palo Alto. If you wanna escape daily pressure, come and see us.</span></p>
+    </div>
+    <div class="titles-holder" ng-show="headerContent === 'titles'">
+        <h3>{{ team.name }}</h3>
+    </div>
+    <div class="header-buttons-group">
+        <input type="button" value="Profile" ng-click="headerContent = 'profile'" class="button red-button tile">
+        <input type="button" value="Facts" ng-click="headerContent = 'facts'" class="button red-button tile">
+        <input type="button" value="Signature" ng-click="headerContent = 'signature'" class="button red-button tile">
+        <input type="button" value="Titles" ng-click="headerContent = 'titles'" class="button red-button tile">
+    </div>
+</div>
+
+<div class="container">
+    <div id="team-feed"><div class="left-container">
+        <div class="content-box" ng-repeat="event in events">
+            <div class="feed-info">
+                <h3>{{ event.league }} - Stage {{ event.stage }}</h3>
+                <p>Ended Date: </p>
+            </div>
+            <div class="match-result tile">
+                <event event-object="event" data="data"></event>
+            </div>
+        </div>
+    </div></div>
+    <div id="team-sideboard"><div class="right-container">
+        <div class="content-box">
+            <h3>Members</h3>
+            <face-thumbnail ng-repeat="member in members"
+                            name="{{ member.name }}"
+                            src="{{ member['avatar URL'] }}"
+                            href="#/user/:{{ member.id }}">
+            </face-thumbnail>
+        </div>
+        <div class="content-box">
+            <h3>Leagues Played</h3>
+            <ul>
+                <li ng-repeat="league in leaguesPlayed">{{ league.name }}</li>
+            </ul>
+        </div>
+    </div></div>
+</div>

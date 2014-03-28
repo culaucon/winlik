@@ -1,0 +1,21 @@
+var WinLikApp = angular.module('WinLikApp', ['ngRoute']);
+
+WinLikApp.controller("navController", ['$scope', function($scope) {
+    $scope.loggedUserData = WinLik.getWinLikItem('users', WinLik.userLogged);
+}]);
+
+WinLikApp.config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+        .when('/', {
+            templateUrl: '/feed.html',
+            controller: 'feedControllers'
+        })
+        .when('/user/:userID', {
+            templateUrl: '/user.html',
+            controller: 'userControllers'
+        })
+        .when('/team/:teamID', {
+            templateUrl: '/team.html',
+            controller: 'teamControllers'
+        });
+}]);

@@ -1,0 +1,66 @@
+<table ng-if="event.participantIDs.length === 2 && event.isMatch"
+     ng-init="participant0=getParticipant(event.participantIDs[0]);
+              participant1=getParticipant(event.participantIDs[1])">
+    <tr>
+        <td>
+            <face-thumbnail
+                name="{{ participant0.name }}"
+                src="{{ participant0['avatar URL'] }}"
+                href="{{ getHRef(event.participantIDs[0]) }}">
+            </face-thumbnail>
+        </td>
+        <td><span class="versus-score">{{ event.scores[0] }} - {{ event.scores[1] }}</span></td>
+        <td>
+            <face-thumbnail
+                name="{{ participant1.name }}"
+                src="{{ participant1['avatar URL'] }}"
+                href="{{ getHRef(event.participantIDs[1]) }}">
+            </face-thumbnail>
+        </td>
+    </tr>
+</table>
+<div ng-if="event.participantIDs.length > 2 && event.isMatch">
+    <table>
+        <tr>
+            <th>Rank</th>
+            <th>Participant</th>
+            <th>Score ({{ event['score-unit'] }})</th>
+        </tr>
+        <tr ng-repeat="i in [0,1,2]">
+            <td>{{i+1}}</td>
+            <td ng-init="id = event.participantIDs[i]">
+                <face-thumbnail
+                        name="{{ getParticipant(id).name }}"
+                        src="{{ getParticipant(id)['avatar URL'] }}"
+                        href="{{ getHRef(id) }}">
+                </face-thumbnail>
+            </td>
+            <td>{{ event.scores[i] }}</td>
+        </tr>
+        <tr>
+            <td>...</td>
+        </tr>
+        <tr ng-init="id = event.myParticipantID">
+            <td>?</td>
+            <td>
+                <face-thumbnail
+                        name="{{ getParticipant(id).name }}"
+                        src="{{ getParticipant(id)['avatar URL'] }}"
+                        href="{{ getHRef(id) }}">
+                </face-thumbnail>
+            </td>
+            <td>?</td>
+        </tr>
+    </table>
+</div>
+<div ng-if="!event.isMatch">
+    Winners of the stage are:
+    <div ng-repeat="winnersGroup in event.winnersByGroups">
+        <h3>Group {{winnersGroup.group}}</h3>
+        <face-thumbnail ng-repeat="winnerID in winnersGroup.participantIDs"
+                name="{{ getParticipant(winnerID).name }}"
+                src="{{ getParticipant(winnerID)['avatar URL'] }}"
+                href="{{ getHRef(winnerID) }}">
+        </face-thumbnail>
+    </div>
+</div>
